@@ -3,9 +3,9 @@ cmake_minimum_required(VERSION 3.11)
 project(raylib)
 
 set(CMAKE_CXX_STANDARD 17)
-
-include_directories(/opt/homebrew/include)
-link_directories(/opt/homebrew/lib)
+find_package(raylib REQUIRED)
+include_directories(${RAYLIB_INCLUDE_DIRS})
+link_directories(${RAYLIB_LIBRARY_DIRS})
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 set(axe_game_src 
