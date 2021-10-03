@@ -20,9 +20,9 @@ public:
 private:
     int width_;
     int height_;
+    float frameTime_;
     std::vector<EntityPtr> objects_;
     PlayerPtr player_;
 };
-
 
 #endif

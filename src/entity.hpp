@@ -13,7 +13,7 @@ enum class Direction
 class Entity
 {
 public:
-    virtual void draw(int width, int height) = 0;
+    virtual void draw(int width, int height, float frameTime) = 0;
 };
 
 #endif

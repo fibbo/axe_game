@@ -7,7 +7,7 @@ class Player : public Entity
 {
 public:
     Player(int x, int y, int r, int s);
-    void draw(int width, int height) override;
+    void draw(int width, int height, float frameTime) override;
 private:
     int x_;
     int y_;

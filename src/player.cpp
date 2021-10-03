@@ -3,6 +3,8 @@
 #include "raylib.h"
 
 #include <algorithm>
+#include <cstdio>
+#include <cmath>
 
 Player::Player(int x, int y, int r, int s)
   : x_(x)
@@ -12,7 +14,7 @@ Player::Player(int x, int y, int r, int s)
   , current_speed_(base_speed_)
   , last_direction_(Direction::NONE) {}
 
-void Player::draw(int width, int height)
+void Player::draw(int width, int height, float frameTime)
 {
     DrawCircle(x_, y_, r_, BLUE);
     if (IsKeyDown(KEY_D))
@@ -21,11 +23,13 @@ void Player::draw(int width, int height)
         {
             current_speed_ += 1;
         }
-        else {
+        else
+        {
             current_speed_ = base_speed_;
             last_direction_ = Direction::RIGHT;
         }
-        x_ = std::min(x_ + current_speed_, width - r_);
+        // needs ceil otherwise it gets truncated to the original int value for a while
+        x_ = std::min(static_cast<int>(std::ceil(x_ + frameTime * current_speed_)), width - r_);
     }
     else if (IsKeyDown(KEY_A))
     {
@@ -33,11 +37,12 @@ void Player::draw(int width, int height)
         {
             current_speed_ += 1;
         }
-        else {
+        else
+        {
             current_speed_ = base_speed_;
             last_direction_ = Direction::LEFT;
         }
-        x_ = std::max(r_, x_ - current_speed_);
+        x_ = std::max(r_, static_cast<int>(x_ - frameTime * current_speed_));
     }
     else {
         current_speed_ = std::max(base_speed_, current_speed_ - 1);
